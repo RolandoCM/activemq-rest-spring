@@ -1,0 +1,25 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:hz="http://www.hazelcast.com/schema/spring"
+	xmlns:cache="http://www.springframework.org/schema/cache" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+              http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+              http://www.springframework.org/schema/aop
+			  http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+              http://www.hazelcast.com/schema/spring
+              http://www.hazelcast.com/schema/spring/hazelcast-spring-3.9.xsd
+              http://www.springframework.org/schema/cache           
+              http://www.springframework.org/schema/cache/spring-cache.xsd
+       ">
+	<bean id="mbeanServer" class="org.springframework.jmx.support.MBeanServerFactoryBean"></bean>
+	<bean id="web" class="com.activemq.rest.controller.WebController" />
+
+	<bean id="exporter" class="org.springframework.jmx.export.MBeanExporter">
+		<property name="beans">
+			<map>
+				<entry key="bean:name=MyMBeanName" value-ref="web" />
+			</map>
+		</property>
+		<!-- <property name="server" ref="mbeanServer"></property> -->
+	</bean>
+
+</beans>
